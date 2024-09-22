@@ -1,2 +1,2 @@
-# hot-mail
+# bot-mail
 Projet Python pour l'envoi de mail automatique
