@@ -3,6 +3,11 @@
 ## Description
 BotMail est un projet Python qui permet d'envoyer des mails automatiquement à une liste de destinataires.
 
+## Pré-requis
+Si vous disposez d'un compte Gmail, vous devrez activer le partage pour les applications tiers.
+Ensuite, vous pourrez récupérer un mot de passe à utiliser via le lien :
+https://myaccount.google.com/apppasswords?
+
 ## Installation
 Pour installer le projet, il suffit de cloner le dépôt et d'installer les dépendances nécessaires avec la commande suivante:
 ```bash
