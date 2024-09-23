@@ -31,28 +31,37 @@ class MenuConfiguration:
         self.message = Messages()
         self.app :HotMail= app
 
+    def __header_menu(self) -> None:
+        """
+        Afficher l'en-tête du menu
+        """
+        os.system('cls')
+        print(self.message.LOGO)
+        print(self.message.AUTEUR, "at https://github.com/boguh/bot-mail", '\n')
+        print(self.message.CONFIGURATION_TITRE, '\n')
+
     def show_menu(self) -> None:
         """
         Afficher le menu de configuration
         """
-        os.system('cls')
+        self.__header_menu()
 
-        print(self.message.LOGO)
-        print(self.message.AUTEUR, '\n')
-
-        print(self.message.CONFIGURATION_TITRE, '\n')
-
+        print(self.message.SEPARATEUR)
         print(self.message.CONFIG_EMAIL + self.app.config['email'])
         print(self.message.CONFIG_PASSWORD + self.app.config['password'])
-        print(self.message.CONFIG_OBJET + self.app.config['objet'], '\n')
+        print(self.message.CONFIG_OBJET + self.app.config['objet'])
+        print(self.message.SEPARATEUR)
         print(self.message.CONFIG_XLSX + self.app.config['xlsx'])
-        print(self.message.CONFIG_TEMPLATE + self.app.config['template'], '\n')
+        print(self.message.CONFIG_TEMPLATE + self.app.config['template'])
+        print(self.message.CONFIG_PJ, self.app.config['attachment'])
+        print(self.message.SEPARATEUR, '\n')
 
         print(self.message.CONFIGURATION_EMAIL)
         print(self.message.CONFIGURATION_PASSWORD)
         print(self.message.CONFIGURATION_OBJET)
         print(self.message.CONFIGURATION_XLSX)
         print(self.message.CONFIGURATION_TEMPLATE)
+        print(self.message.CONFIGURATION_PJ)
         print(self.message.CONFIGURATION_FIN, '\n')
 
         option :int= self.ask_option()
@@ -70,12 +79,7 @@ class MenuConfiguration:
         """
         Changer l'email
         """
-        os.system('cls')
-
-        print(self.message.LOGO)
-        print(self.message.AUTEUR, '\n')
-
-        print(self.message.CONFIGURATION_TITRE, '\n')
+        self.__header_menu()
 
         print(self.message.CONFIG_EMAIL + self.app.config['email'])
         email :str= input("Nouvel email: ")
@@ -87,10 +91,7 @@ class MenuConfiguration:
         """
         Changer le mot de passe
         """
-        os.system('cls')
-
-        print(self.message.LOGO)
-        print(self.message.AUTEUR, '\n')
+        self.__header_menu()
 
         print(self.message.CONFIGURATION_TITRE, '\n')
 
@@ -104,10 +105,7 @@ class MenuConfiguration:
         """
         Changer l'objet
         """
-        os.system('cls')
-
-        print(self.message.LOGO)
-        print(self.message.AUTEUR, '\n')
+        self.__header_menu()
 
         print(self.message.CONFIGURATION_TITRE, '\n')
 
@@ -121,12 +119,7 @@ class MenuConfiguration:
         """
         Changer le nom du fichier Excel
         """
-        os.system('cls')
-
-        print(self.message.LOGO)
-        print(self.message.AUTEUR, '\n')
-
-        print(self.message.CONFIGURATION_TITRE, '\n')
+        self.__header_menu()
 
         print(self.message.CONFIG_XLSX + self.app.config['xlsx'])
         xlsx :str= input("Nouveau nom du fichier Excel: ")
@@ -138,17 +131,24 @@ class MenuConfiguration:
         """
         Changer le nom du template
         """
-        os.system('cls')
-
-        print(self.message.LOGO)
-        print(self.message.AUTEUR, '\n')
-
-        print(self.message.CONFIGURATION_TITRE, '\n')
+        self.__header_menu()
 
         print(self.message.CONFIG_TEMPLATE + self.app.config['template'])
         template :str= input("Nouveau nom du template: ")
         self.app.change_json_prop('template', template)
         print(self.message.CONFIRMATION_TEMPLATE)
+
+        self.show_menu()
+
+    def change_attachment(self) -> None:
+        """
+        Changer le nom du fichier à joindre
+        """
+        self.__header_menu()
+
+        print(self.message.CONFIG_PJ + self.app.config['attachment'])
+        attachment :str= input("Nouveau nom du fichier à joindre: ")
+        self.app.change_json_prop('attachment', attachment)
 
         self.show_menu()
 
@@ -169,6 +169,8 @@ class MenuConfiguration:
         elif option == 5:
             self.change_template()
         elif option == 6:
+            self.change_attachment()
+        elif option == 7:
             self.app.show_menu()
         else:
             self.show_menu()

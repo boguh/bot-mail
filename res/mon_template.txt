@@ -1,9 +1,0 @@
-Dear {{nom}} {{prenom}},
-
-I am currently studying Geography at the University of Sherbrooke.
-I know that in your company at {{ville}}, you are interested in finding an intern.
-
-If my profile suits the job, please let me know
-Best regards,
-
-Hugo BOURDAIS

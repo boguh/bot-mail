@@ -30,11 +30,11 @@ class MenuMail:
         :param app: Instance de la classe HotMail
         :type app: HotMail
         """
-        self.NOM_XLSX = "mon_fichier.xlsx"
-        self.NOM_TEMPLATE = "mon_template.txt"
-
         self.message = Messages()
         self.app :HotMail= app
+
+        self.NOM_XLSX = self.app.config['xlsx']
+        self.NOM_TEMPLATE = self.app.config['template']
 
         self.__er: ExcelReader = ExcelReader(self.NOM_XLSX)
         self.__tr: TemplateReader = TemplateReader(self.NOM_TEMPLATE)
@@ -48,7 +48,7 @@ class MenuMail:
         """
         os.system('cls')
         print(self.message.LOGO)
-        print(self.message.AUTEUR, '\n')
+        print(self.message.AUTEUR, "at https://github.com/boguh/bot-mail", '\n')
         print(self.message.MAIL_TITRE, '\n')
 
     def show_menu(self) -> None:
@@ -117,7 +117,7 @@ class MenuMail:
             ms :MailService= MailService(self.app.config['email'], self.app.config['password'])
             for mail in self.__mails:
                 self.__header_menu()
-                temp :bool = ms.send(mail['to'], self.app.config['objet'], mail['mail'])
+                temp :bool = ms.send(mail['to'], self.app.config['objet'], mail['mail'], self.app.config['attachment'])
                 if not temp:
                     print("Erreur lors de l'envoi du mail à :", mail['to'])
                     break
@@ -158,6 +158,13 @@ class MenuMail:
 
         print(self.message.MAIL_TITRE, '\n')
 
-        print(self.__tr.template, '\n')
+        print(self.message.SEPARATEUR)
+        print("From:", self.app.config['email'])
+        print("To:", "receiver@mail.com", '\n')
+        print("Subject:", self.app.config['objet'])
+        print("Attachment:", self.app.config['attachment'], '\n')
+        print(self.__tr.template)
+        print(self.message.SEPARATEUR, '\n')
+
         input("Appuyez sur une touche pour continuer...")
         self.show_menu()

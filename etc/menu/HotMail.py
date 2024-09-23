@@ -40,12 +40,13 @@ class HotMail:
         os.system('cls')
 
         print(self.messages.LOGO)
-        print(self.messages.AUTEUR, '\n')
+        print(self.messages.AUTEUR, "at https://github.com/boguh/bot-mail", '\n')
 
         print(self.messages.MENU_TITRE, '\n')
 
         print(self.messages.OPTION_XLSX)
         print(self.messages.OPTION_TEMPLATE)
+        print(self.messages.OPTION_PJ)
         print(self.messages.OPTION_MAIL)
         print(self.messages.OPTION_CONFIGURATION)
         print(self.messages.OPTION_QUITTER, '\n')
@@ -70,19 +71,23 @@ class HotMail:
         """
         if option == 1:
             # Ouverture du fichier Excel
-            os.system('start excel res/mon_fichier.xlsx')
+            os.system('start excel res/' + self.config['xlsx'])
             self.show_menu()
         elif option == 2:
             # Ouverture du template
-            os.system('start notepad res/mon_template.txt')
+            os.system('start notepad res/' + self.config['template'])
             self.show_menu()
         elif option == 3:
+            # Ouverture du pdf
+            os.system('start res/' + self.config['attachment'])
+            self.show_menu()
+        elif option == 4:
             from etc.menu.MenuMail import MenuMail
             MenuMail(self).show_menu()
-        elif option == 4:
+        elif option == 5:
             from etc.menu.MenuConfiguration import MenuConfiguration
             MenuConfiguration(self).show_menu()
-        elif option == 5:
+        elif option == 6:
             os.system('cls')
         else:
             self.show_menu()

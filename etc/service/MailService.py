@@ -1,5 +1,5 @@
 ########################################################################################################################
-
+import os
 # Description: Classe HotMail permettant de gérer les actions du menu principal
 # Author: Hugo BOURDAIS
 # Date: 22/09/2024
@@ -9,6 +9,8 @@
 ########################################################################################################################
 
 import smtplib
+from email import encoders
+from email.mime.base import MIMEBase
 
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -21,6 +23,8 @@ class MailService:
     """
     Service d'envoi de mail
     """
+
+    RES_FILE_PATH = "res"
 
     def __init__(self, email :str, password :str) -> None:
         """
@@ -38,7 +42,7 @@ class MailService:
         self.__email = email
         self.__password = password
 
-    def send(self, email :str, subject :str, message :str) -> bool:
+    def send(self, email :str, subject :str, message :str, attachment :str) -> bool:
         """
         Envoyer un mail
         :param email: Adresse email du destinataire
@@ -47,6 +51,8 @@ class MailService:
         :type subject: str
         :param message: Contenu du mail
         :type message: str
+        :param attachment: Chemin du fichier à joindre
+        :type attachment: str
         :return: True si le mail a été envoyé, False sinon
         :rtype: bool
         """
@@ -56,6 +62,18 @@ class MailService:
         msg['To'] = email
         msg['Subject'] = subject
         msg.attach(MIMEText(message, 'plain'))
+
+        # Obtenir le répertoire courant
+        current_dir: str = os.getcwd()
+        # Construire le chemin complet
+        chemin_fichier: str = os.path.join(current_dir, self.RES_FILE_PATH, attachment)
+        # Joindre un fichier
+        with open(chemin_fichier, 'rb') as temp:
+            part = MIMEBase('application', 'octet-stream')
+            part.set_payload(temp.read())
+        encoders.encode_base64(part)
+        part.add_header('Content-Disposition', f'attachment; filename= {attachment}')
+        msg.attach(part)
 
         # Envoyer le message
         with smtplib.SMTP(self.__SMTP_SERVER, self.__PORT) as server:

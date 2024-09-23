@@ -48,9 +48,10 @@ class Messages:
         self.SELECT_OPTION: str = "Sélectionnez une option: "
         self.OPTION_XLSX: str = "\t1 - Ouvrir le fichier Excel"
         self.OPTION_TEMPLATE: str = "\t2 - Ouvrir le template"
-        self.OPTION_MAIL: str = "\t3 - Envoyer le(s) mail(s)"
-        self.OPTION_CONFIGURATION: str = "\t4 - Configuration"
-        self.OPTION_QUITTER: str = "\t5 - Quitter"
+        self.OPTION_PJ: str = "\t3 - Ouvrir la pièce jointe"
+        self.OPTION_MAIL: str = "\t4 - Envoyer le(s) mail(s)"
+        self.OPTION_CONFIGURATION: str = "\t5 - Configuration"
+        self.OPTION_QUITTER: str = "\t6 - Quitter"
         # --------------------------------------------------------------------------------------------------------------
 
         # Messages d'action pour le menu configuration -----------------------------------------------------------------
@@ -60,7 +61,8 @@ class Messages:
         self.CONFIGURATION_OBJET: str = "\t3 - Changer l'objet"
         self.CONFIGURATION_XLSX: str = "\t4 - Changer le nom du fichier Excel"
         self.CONFIGURATION_TEMPLATE: str = "\t5 - Changer le nom du template"
-        self.CONFIGURATION_FIN: str = "\t6 - Quitter la configuration"
+        self.CONFIGURATION_PJ: str = "\t6 - Changer la pièce jointe"
+        self.CONFIGURATION_FIN: str = "\t7 - Quitter la configuration"
 
         # Configuration actuelle
         self.CONFIG_EMAIL: str = "Email: "
@@ -68,6 +70,7 @@ class Messages:
         self.CONFIG_OBJET: str = "Objet: "
         self.CONFIG_XLSX: str = "Nom du fichier Excel: "
         self.CONFIG_TEMPLATE: str = "Nom du template: "
+        self.CONFIG_PJ: str = "Nom de la pièce jointe: "
 
         # Messages d'erreur pour le menu configuration
         self.ERREUR_EMAIL: str = "Erreur lors du changement de l'email"
@@ -90,6 +93,7 @@ class Messages:
 
         # Messages de fin ----------------------------------------------------------------------------------------------
         self.FIN: str = "Fin du programme"
+        self.SEPARATEUR: str = "----------------------------------------"
         # --------------------------------------------------------------------------------------------------------------
 
         # Page de lancement --------------------------------------------------------------------------------------------
